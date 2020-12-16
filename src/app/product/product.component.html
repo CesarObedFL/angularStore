@@ -1,0 +1,58 @@
+<div class="jumbotron jumbotron-fluid">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3">
+                <label for="productList">Productos:</label>
+            </div>
+            <div class="col-md-6">
+                <select class="form-control" id="selectedProduct" [(ngModel)]="selectedProduct">
+                    <option *ngFor="let item of catalog" [value]="item.productId">{{ item.description }}</option>
+                </select>
+            </div>
+            <div class="col-md-3">
+                <button class="btn btn-block btn-primary" (click)="addProduct()">Agregar</button>
+            </div>
+        </div>
+        <hr>
+        <div class="row">
+            <div class="table-responsive">
+                <table class="table table-hover" >
+                    <thead class="thead-dark">
+                        <tr>
+                            <th scope="col-sm-2">Código</th>
+                            <th scope="col-sm-3">Descripción</th>
+                            <th scope="col-sm-2">Cantidad</th>
+                            <th scope="col-sm-2">Precio</th>
+                            <th scope="col-sm-2">Total</th>
+                            <th scope="col-sm-1"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let product of products">
+                            <td scope="row">{{ product.code }}</td>
+                            <td>{{ product.description }}</td>
+                            <td><input type="number" [(ngModel)]="product.amount" (change)="getTotal()"></td>
+                            <td>{{ product.salePrice | currency }}</td>
+                            <td>{{ (product.amount * product.salePrice) | currency }}</td>
+                            <td><button class="btn btn-danger" (click)="removeProduct(product.productId)">X</button></td>
+                        </tr>
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <th colspan="2"></th>
+                            <th>SubTotal</th>
+                            <th>Descuento(%)</th>
+                            <th>Total</th>
+                        </tr>
+                        <tr>
+                            <td colspan="2"></td>
+                            <td><label for="subtotal">{{ subtotal | currency }}</label></td>
+                            <td><input type="number" [(ngModel)]="discount" (change)="getTotal()"></td>
+                            <td><label for="total">{{ total | currency }}</label></td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
