@@ -16,7 +16,7 @@
                         <label for="password">Contraseña</label>
                         <input type="password" class="form-control" name="password" formControlName="password" id="password">
                         <span *ngIf="password.errors?.required && (password.dirty || password.touched)" class="errorMessage">El campo es requerido</span>
-                        <span *ngIf="password.errors?.min && (password.dirty || password.touched)" class="errorMessage">El campo tiene que ser un password valido</span>
+                        <span *ngIf="password.errors?.minlength && (password.dirty || password.touched)" class="errorMessage">El campo tiene que ser un password valido</span>
                     </div>
                     <button type="submit" class="btn btn-primary btn-block">Acceder</button>
                 </form>

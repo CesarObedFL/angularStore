@@ -24,7 +24,7 @@ export class AccessComponent implements OnInit {
         Validators.required, Validators.email
       ]),
       password: new FormControl('', [
-        Validators.required, Validators.min(8)
+        Validators.required, Validators.minLength(8)
       ])
     });
   }
@@ -44,10 +44,10 @@ export class AccessComponent implements OnInit {
             email: this.loginForm.value.email,
             password: this.loginForm.value.password
         }
-      ).subscribe((data) => {
+      ).subscribe((data: any) => {
         console.log(data);
-        //localStorage.setItem("tokenString", data.tokenString);
-        //localStorage.setItem("expirationDate", data.expirationDate);
+        localStorage.setItem("tokenString", data.tokenString);
+        localStorage.setItem("expirationDate", data.expirationDate);
         this.router.navigate(['/product/list']);
       });
     } else {

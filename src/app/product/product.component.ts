@@ -31,14 +31,21 @@ export class ProductComponent implements OnInit {
   }
 
   addProduct(): void {
-    let index = this.catalog.findIndex(item => item.productId == this.selectedProduct);
-    this.products.push({
-      productId: this.catalog[index].productId,
-      code: this.catalog[index].internalCode,
-      description: this.catalog[index].description,
-      amount: 1,
-      salePrice: this.catalog[index].salePrice
-    });
+    let i = this.products.findIndex(item => item.productId == this.selectedProduct);
+    if (i > -1) {
+      this.products[i].amount++;
+      this.validateStock(this.products[i].productId);
+    } else {
+      let index = this.catalog.findIndex(item => item.productId == this.selectedProduct && item.totalStock > 0);
+      this.products.push({
+        productId: this.catalog[index].productId,
+        code: this.catalog[index].internalCode,
+        description: this.catalog[index].description,
+        amount: 1,
+        stock: this.catalog[index].totalStock,
+        salePrice: this.catalog[index].salePrice
+      });
+    }
     this.getTotal();
   }
 
@@ -52,6 +59,14 @@ export class ProductComponent implements OnInit {
   removeProduct(productId: number): void {
     let index = this.products.findIndex(item => item.productId == productId);
     this.products.splice(index, 1);
+    this.getTotal();
+  }
+
+  validateStock(productId: number): void {
+    let product = this.products.find(item => item.productId == productId);
+    if (product.amount > product.stock) {
+      product.amount = product.stock;
+    }
     this.getTotal();
   }
 

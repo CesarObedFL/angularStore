@@ -31,7 +31,7 @@
                         <tr *ngFor="let product of products">
                             <td scope="row">{{ product.code }}</td>
                             <td>{{ product.description }}</td>
-                            <td><input type="number" [(ngModel)]="product.amount" (change)="getTotal()"></td>
+                            <td><input type="number" [(ngModel)]="product.amount" (change)="validateStock(product.productId)"></td>
                             <td>{{ product.salePrice | currency }}</td>
                             <td>{{ (product.amount * product.salePrice) | currency }}</td>
                             <td><button class="btn btn-danger" (click)="removeProduct(product.productId)">X</button></td>
