@@ -1,10 +1,10 @@
 <div class="jumbotron jumbotron-fluid">
     <div class="container">
         <div class="row">
-            <div class="col-md-3">
+            <div class="col-md-2">
                 <label for="productList">Productos:</label>
             </div>
-            <div class="col-md-6">
+            <div class="col-md-7">
                 <select class="form-control" id="selectedProduct" [(ngModel)]="selectedProduct">
                     <option *ngFor="let item of catalog" [value]="item.productId">{{ item.description }}</option>
                 </select>
@@ -52,6 +52,15 @@
                         </tr>
                     </tfoot>
                 </table>
+            </div>
+        </div>
+        <hr>
+        <div class="row">
+            <div class="col-md-6">
+                <button class="btn btn-block btn-primary" (click)="buy()">Comprar</button>
+            </div>
+            <div class="col-md-6">
+                <button class="btn btn-block btn-danger">Cancelar</button>
             </div>
         </div>
     </div>

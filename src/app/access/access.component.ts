@@ -41,8 +41,8 @@ export class AccessComponent implements OnInit {
     if (this.loginForm.status == 'VALID') {
       this.httpClient.post(
         'http://www.nivaapi.com/api/login', {
-            email: this.loginForm.value.email,
-            password: this.loginForm.value.password
+          email: this.loginForm.value.email,
+          password: this.loginForm.value.password
         }
       ).subscribe((data: any) => {
         console.log(data);

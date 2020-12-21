@@ -25,9 +25,9 @@ export class ProductComponent implements OnInit {
   getAllProducts() {
     this.httpClient.get(
       "http://www.nivaapi.com/api/product"
-      ).subscribe((data:any) => {
-        this.catalog = data
-      });
+    ).subscribe((data:any) => {
+      this.catalog = data
+    });
   }
 
   addProduct(): void {
@@ -68,6 +68,28 @@ export class ProductComponent implements OnInit {
       product.amount = product.stock;
     }
     this.getTotal();
+  }
+
+  buy(): void {
+    this.httpClient.post(
+      "http://www.nivaapi.com/api/Sale", {
+        totalProducts: 10,
+        subtotal: 100,
+        discount: 0,
+        total: 100,
+        saleDetail: [
+          {
+            saleDetailId: 0,
+            productId: 1,
+            amount: 1,
+            salePrice: 5,
+            total: 5
+          }
+        ]
+      }
+    ).subscribe((data: any) => {
+      console.log(data);
+    });
   }
 
 }

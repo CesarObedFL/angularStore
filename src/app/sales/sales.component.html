@@ -1,0 +1,55 @@
+<div class="jumbotron jumbotron-fluid">
+    <div class="container">
+        <div class="row justify-content-center">
+            <h1 class="display-6">Ventas Realizadas</h1>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <table class="table table-hover">
+                    <thead class="table-dark">
+                        <th>ID</th>
+                        <th># de Productos</th>
+                        <th>Subtotal</th>
+                        <th>Descuento</th>
+                        <th>Total</th>
+                        <th></th>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let item of sales">
+                            <td>{{ item.saleId }}</td>
+                            <td>{{ item.totalProducts }}</td>
+                            <td>{{ item.subtotal | currency }}</td>
+                            <td>{{ item.discount | percent }}</td>
+                            <td>{{ item.total | currency }}</td>
+                            <td>
+                                <button type="button" class="btn btn-primary" (click)="getSaleById(item.saleId)" data-bs-toggle="modal" data-bs-target="#saleModal">
+                                    <small><i>detalles</i></small>
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+  
+<!-- Modal -->
+<div class="modal" id="saleModal" [ngClass]="{'show':showModal}">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Detalle de Venta</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="showModal=false">
+                    <span aria-hidden="true">&times;</span>
+                </button>          
+            </div>
+            <div class="modal-body">
+                <app-sale-detail [id]="selectedId"></app-sale-detail>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-success" (click)="showModal=false" data-bs-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>

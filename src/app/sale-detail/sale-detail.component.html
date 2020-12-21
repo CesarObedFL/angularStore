@@ -1,0 +1,41 @@
+<ul class="list-group" *ngIf="sale">
+    <li class="list-group-item d-flex justify-content-between align-items-center">
+        <b>ID:</b> 
+        <span class="badge badge-primary badge-pill">{{ sale.saleId }}</span>
+    </li>
+    <li class="list-group-item d-flex justify-content-between align-items-center">
+        <b># de Productos:</b> 
+        <span class="badge badge-primary badge-pill">{{ sale.totalProducts }}</span>
+    </li>
+    <li class="list-group-item d-flex justify-content-between align-items-center">
+        <b>Subtotal</b>
+        <span class="badge badge-primary badge-pill">{{ sale.subtotal | currency }}</span>
+    </li>
+    <li class="list-group-item d-flex justify-content-between align-items-center">
+        <b>Descuento</b>
+        <span class="badge badge-primary badge-pill">{{ sale.discount | percent }}</span>
+    </li>
+    <li class="list-group-item d-flex justify-content-between align-items-center">
+        <b>Total</b>
+        <span class="badge badge-primary badge-pill">{{ sale.total | currency }}</span>
+    </li>
+</ul>
+
+<table class="table table-hover">
+    <thead class="table-dark">
+        <th>ID de Producto</th>
+        <th>Cantidad</th>
+        <th>Precio de Venta</th>
+        <th>Total</th>
+    </thead>
+    <tbody *ngIf="sale">
+        <tr *ngFor="let item of sale.saleDetail">
+            <td>{{ item.productId }}</td>
+            <td>{{ item.amount }}</td>
+            <td>{{ item.salePrice | currency }}</td>
+            <td>{{ item.total | currency }}</td>
+        </tr>
+    </tbody>
+</table>
+
+  
